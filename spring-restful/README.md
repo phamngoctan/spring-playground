@@ -31,3 +31,16 @@ Answers
 
 
 All of the above configuration is done by SpringBootAutoConfiguration. It checks the classpath the existence of pre-defined classes
+
+## Bean types??? and its scope???
+## Exception handling in Spring
+
+```
+@ControllerAdvice
+@RestController
+and extends ResponseEntityExceptionHandler
+```
+
+## Validation API
+Spring uses hibernate-validator as the implementation for javax validation API
+

@@ -4,8 +4,11 @@ import java.net.URI;
 import java.text.MessageFormat;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,11 +30,11 @@ public class UserResource {
 	@GetMapping(path = "/users/{id}")
 	public User getUser(@PathVariable Long id) {
 		return service.find(id)
-				.orElseThrow(() -> new UserNotFoundException(MessageFormat.format("User with id {0} not found", id)));
+				.orElseThrow(() -> new UserNotFoundException(MessageFormat.format("User with id {0}", id)));
 	}
 	
 	@PostMapping(path = "/users")
-	public ResponseEntity<User> createUser(@RequestBody User user) {
+	public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
 		User createdUser = service.save(user);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 					.path("/{id}")
@@ -39,6 +42,14 @@ public class UserResource {
 					.toUri();
 		
 		return ResponseEntity.created(uri).body(createdUser);
+	}
+	
+	@DeleteMapping("/users/{id}")
+	public void deleteUser(@PathVariable Long id) {
+		User deletedUser = service.deleteById(id);
+		if (deletedUser == null) {
+			throw new UserNotFoundException("id-"+ id);
+		}
 	}
 	
 }

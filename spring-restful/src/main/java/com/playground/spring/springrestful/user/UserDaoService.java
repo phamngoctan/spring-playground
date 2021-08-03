@@ -35,5 +35,14 @@ public class UserDaoService {
 	public Optional<User> find(Long id) {
 		return users.stream().filter(i -> i.getId().equals(id)).findAny();
 	}
+
+	public User deleteById(Long id) {
+		Optional<User> userOpt = users.stream().filter(u -> u.getId().equals(id)).findAny();
+		if (userOpt.isPresent()) {
+			users.removeIf(u -> u.getId().equals(id));
+			return userOpt.get();
+		}
+		return null;
+	}
 }
 
