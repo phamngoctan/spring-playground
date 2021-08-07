@@ -33,6 +33,7 @@ Answers
 All of the above configuration is done by SpringBootAutoConfiguration. It checks the classpath the existence of pre-defined classes
 
 ## Bean types??? and its scope???
+
 ## Exception handling in Spring
 
 ```
@@ -44,3 +45,55 @@ and extends ResponseEntityExceptionHandler
 ## Validation API
 Spring uses hibernate-validator as the implementation for javax validation API
 
+## Hateoas - Hypermedia as the Engine of Application State
+Attach neccessary link to the model before returning to the client
+
+## Content negotiation - using request header - Accept: application/xml
+
+## I18n - using request header - Accept-Language: en
+
+## API documents - Open API 3.0 - Springdoc - this thing is amazing :)
+```
+localhost:8080/swagger-ui.html
+```
+For getting the json document:
+```
+curl localhost:8080/v3/api-docs
+```
+
+## Monitoring APIs with Spring Boot Actuator
+Where to check the actuator
+```
+curl http://localhost:8080/actuator/
+```
+By default, just only three APIs are available. How to enable other? Add this property to the application.properties
+```
+management.endpoints.web.exposure.include=*
+```
+
+## Visualizing APIs with HAL Explorer
+HAL Explorer helps us check the APIs in an easy way. Even working quite well with the Hateoas. For non-technical guys, it would be best to use it. Really convenient without requiring any additional softwares installed.
+
+Go to url localhost:8080 for the HAL Explorer checking
+
+## Static Filtering the data returned back to client - using jackson @JsonIgnore 
+
+## Dynamic Filtering the data returned back to client - using jackson MappingJacksonValue
+
+## Versioning for APIs
+- URI versioning (Twitter)
+- Request parameter versioning (Amazon)
+- Custom header versioning (Microsoft)
+- Media type versioning (Accept: application/vnd.company.app-v2+json) (GitHub)
+
+Factors affects the decision:
+
+- URI pollution
+- Misuse of HTTP Headers (HTTP headers are invented not for versioning :) )
+- Caching
+- Can we execute the request on the browser?
+- API documentation
+
+No perfect solution :)
+
+## 
