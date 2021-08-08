@@ -16,7 +16,7 @@ public class FilteringController {
 		SomeBean someBean = new SomeBean("val1", "val2", "val3");
 		SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter
 				.filterOutAllExcept("field1"
-//						, "field2"
+//						, "field2"        
 						);
 		FilterProvider filters = new SimpleFilterProvider()
 				.addFilter("SomeBeanFilter", filter);

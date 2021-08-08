@@ -71,7 +71,7 @@ By default, just only three APIs are available. How to enable other? Add this pr
 management.endpoints.web.exposure.include=*
 ```
 
-## Visualizing APIs with HAL Explorer
+## Visualizing APIs with HAL Explorer - JSON Hypertext Application Language or HAL
 HAL Explorer helps us check the APIs in an easy way. Even working quite well with the Hateoas. For non-technical guys, it would be best to use it. Really convenient without requiring any additional softwares installed.
 
 Go to url localhost:8080 for the HAL Explorer checking
@@ -96,4 +96,71 @@ Factors affects the decision:
 
 No perfect solution :)
 
-## 
+## Spring security with basic authentication
+
+## Spring with JPA
+Using h2 database
+
+```
+# Access h2 database with JDBC url jdbc:h2:mem:testdb
+http://localhost:8080/h2-console
+```
+
+## RESTful best practices
+Richarson Maturity Model helps us this thing. It has 3 levels:
+
+- Level 1: Expose SOAP web services in rest style
+	
+	- http://server/getPosts
+	- http://server/deletePosts
+	- http://server/doThis
+	
+- Level 2: Expose resources with proper URI
+	
+	- http://server/accounts
+	- http://server/accounts/10
+	Note: improper use of http methods
+
+- Level 3: Level 2 + HATEOAS -> means data + next possible actions
+
+Best practices:
+
+- Consumer first (understand documents)
+
+
+# Spring Cloud
+
+## Spring Cloud config server
+
+```
+CurrencyCalculationService    ExchangCurrencyService  LimitsService
+                    \              |                  /
+                          SpringCloudConfigServer
+                                   |
+                                   v
+                                  Git
+```
+
+## Dynamic scale up and down
+
+- Naming Server (Eureka)
+- Ribbon (client side load balancing)
+- Feign (Easier REST clients)
+
+```
+                              CurrencyCalculationService
+                                           |
+                                           v
+                                        Ribbon   -> NamingServer
+                        /                  |                              \            
+      CurrencyExchangeService1     CurrencyExchangeService2      CurrencyExchangeService3
+```
+
+## Visibility and monitoring
+
+- Zipkin distributed tracing
+- netflix API Gateway
+
+## Fault tolerance
+
+- Hystrix
