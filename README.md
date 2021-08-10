@@ -1,4 +1,5 @@
 # spring-playground
+Document for Spring is really well prepared, easy to search and apply.
 
 # Spring Cloud
 
@@ -79,6 +80,12 @@ CurrencyCalculationService    ExchangCurrencyService  LimitsService
                                    |
                                Database
 ```
+
+### Spring Cloud Sleuth
+- Adds trace and span ids to the Slf4J
+- servlet filter, rest template, scheduled actions, message channels, feign client, auto supported, each action behind will have the trace and span ids
+- If spring-cloud-sleuth-zipkin is available then the app will generate and report Zipkin-compatible traces via <b>HTTP</b>
+- Sleuth with Zipkin over RabbitMQ or Kafka: If you want to use RabbitMQ or Kafka instead of HTTP, add the spring-rabbit or spring-kafka dependency
 
 ## Fault tolerance
 Hystrix in version 1 and in version 2, we use the resilient

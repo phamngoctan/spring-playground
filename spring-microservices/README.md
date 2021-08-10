@@ -4,3 +4,5 @@
 - currency-conversion-service: one instance is enough to prove.
 - api-gateway: this is the gateway for the client to interact with. All the other services should be in the internal network and should not be exposed to the outside world. Check the urls for testing the service.
 
+# Using docker to start all services
+Go to the docker-compose folder and run docker-componse up. That's it!
