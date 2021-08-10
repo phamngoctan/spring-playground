@@ -1,1 +1,93 @@
 # spring-playground
+
+# Spring Cloud
+
+# Spring Cloud overall
+
+## Spring Cloud config server
+
+One centralized repo, other modules use file bootstrap.properties to config the uri to point to the Spring Cloud config server. :)
+
+- support different profile.
+- Spring cloud config server can connect to the git repo and populate the data in git repo to the interested modules.
+
+```
+CurrencyCalculationService    ExchangCurrencyService  LimitsService
+                    \              |                  /
+                          SpringCloudConfigServer
+                                   |
+                                   v
+                                  Git
+```
+
+Spring cloud bus for dynamically changing the configuration at runtime for LimitsService when there is a change inside the git. Behind the scene, it uses the RabbitMQ for triggering the sync.
+
+## Dynamic scale up and down
+
+In version 2, we use different technologies:
+- Spring cloud load balancer instead of Ribbon
+- Spring cloud gateway instead of Zuul
+- Resilience4j instead of Hystri
+
+V1:
+- Naming Server (Eureka) Netflix
+	- Service registration
+	- Service discovery
+- Ribbon (client side load balancing) Netflix
+- Feign (Easier REST clients) Netflix 
+
+```
+                              CurrencyCalculationService
+                                           |
+                                           v
+                                        Ribbon   -> NamingServer
+                        /                  |                              \            
+      CurrencyExchangeService1     CurrencyExchangeService2      CurrencyExchangeService3
+```
+
+## API Gateway
+Benefit
+- Authentication, authorization and security
+- Rate limits
+- Fault tolerance
+- Service aggregation
+
+V1: Zuul API Gateway for the implementation
+
+V2: Spring Cloud Gateway features:
+- Matches on any request attributes
+- Define predicates and filters
+- Integrate with Spring Cloud Discovery Client (load balancing)
+- Path Rewriting
+
+Spring Cloud Gateway vs Zuul API Gateway:
+- Zuul is built on servlet 2.5 (works with 3.x), using blocking APIs. It doesn't support any long lived connections, like websockets.
+- Gateway is built on Spring Framework 5, Project Reactor and Spring Boot 2 using non-blocking APIs. Websockets are supported and it's a much better developer experience since it's tightly integrated with Spring.
+
+
+## Visibility and monitoring
+
+- Zipkin distributed tracing
+- netflix API Gateway
+
+```
+CurrencyCalculationService    ExchangCurrencyService  LimitsService
+                    \              |                  /
+                                RabbitMQ
+                                   |
+                      ZipkinDistributedTracingServer
+                                   |
+                               Database
+```
+
+## Fault tolerance
+Hystrix in version 1 and in version 2, we use the resilient
+
+- Retry and fallback method
+- Circuit breaker and fallback method
+
+	- Circuit breaker auto replies back to the client without calling the service inside the API.
+	- It auto detect the failure service calls and auto return to the client the fallback response.
+	- Good reference https://resilience4j.readme.io/docs/circuitbreaker.
+
+- Ratelimit: maximum concurrent requests for a specific API
