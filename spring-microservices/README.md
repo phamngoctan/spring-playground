@@ -6,3 +6,17 @@
 
 # Using docker to start all services
 Go to the docker-compose folder and run docker-componse up. That's it!
+
+```
+docker-compose up
+```
+
+# Testing cheat-sheet
+
+```
+curl --location --request GET 'http://localhost:8765/currency-conversion-feign/from/USD/to/INR/quantity/10'[1-20] --header 'Content-Type: application/json' --data-raw '{
+    "birthday": "2000-08-03T03:28:06.822+00:00",
+    "name": "John"
+}'
+
+```
