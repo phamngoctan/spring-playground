@@ -1,9 +1,33 @@
 # spring-playground
 Document for Spring is really well prepared, easy to search and apply.
 
-# Spring Cloud
+# Spring framework
+Spring core goal: to take control all the beans and there dependencies. It solve the problem of dependency injection, build loosely couple applications.
 
-# Spring Cloud overall
+What else?
+
+- Duplicated code. Spring JDBC, Spring MVC, Spring ORM, Spring JMS, Spring AOP, Spring Test
+
+
+# Spring Boot
+
+Spring Boot Goals:
+
+- Enable building production ready for java application
+- Provide common non-functionality features:
+	- embedded servers
+	- metrics
+	- health checks 
+	- externalized configuration
+
+Without using Spring Boot, using Spring should have the following decisions:
+
+- decide the needed dependencies, which version, compatible or not
+- we need to implement the default exception handling
+- implement complete Spring configuration file
+- configure the web.xml:
+	- dispatcher servlet
+	- Spring security
 
 ## Spring Cloud config server
 
